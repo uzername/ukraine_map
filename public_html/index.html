@@ -1,9 +1,4 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <title>TODO supply a title</title>
@@ -13,8 +8,8 @@ and open the template in the editor.
         </script>
     </head>
     <body>
-        <div>TODO write content</div>
-        <div id="rsr" style="width: 500px"></div>
+        <div>Україна (svg, raphael.js, readysetraphael, jquery (неявно))</div>
+        <div id="rsr" style="width: 600px"></div>
         <script type="text/javascript" src="js/ukrmap.js"> </script>
         <script type="text/javascript">
             //need for autoresizing and rescaling. 100% responsive!
@@ -28,31 +23,10 @@ and open the template in the editor.
             var endCircleCode = 3201;
             var nameStep=2;
             var semanticOblastCodes = [
-  'Odesska',
-  'Nikolaevska',
-  'Khersonska',
-  'Volynska',
-  'Rovenska',
-  'Lvovska',
-  'Zakarpatska',
-  'Ternopolska',
-  'Hmelnytska',
-  'Zhitomirska',
-  'Chernovitska',
-  'Vinnitska',
-  'Kievska',
-  'Chernigovska',
-  'Sumska',
-  'Cherkasska',
-  'Poltavska',
-  'Kirovogradska',
-  'Dnipropetrovska',
-  'IvanoFrankovska',
-  'Zaporizhska',
-  'Kharkovska',
-  'Luganska',
-  'Donetska',
-  'Crimea']; //these codes are in sorted order, corresponding to path number
+  'Odesska', 'Nikolaevska', 'Khersonska', 'Volynska', 'Rovenska', 'Lvovska', 'Zakarpatska', 
+  'Ternopolska', 'Hmelnytska', 'Zhitomirska', 'Chernovitska', 'Vinnitska', 'Kievska', 'Chernigovska', 
+  'Sumska', 'Cherkasska', 'Poltavska', 'Kirovogradska', 'Dnipropetrovska', 'IvanoFrankovska', 'Zaporizhska', 
+  'Kharkovska', 'Luganska', 'Donetska', 'Crimea']; //these codes are in sorted order, corresponding to path number
   var semanticOblastCodes2 = [
   'Одеська', 'Миколаївська', 'Херсонська', 'Волинська', 'Рівненська',
   'Львівська', 'Закарпатська', 'Тернопільська', 'Хмельницька', 'Житомирська',
@@ -67,14 +41,16 @@ and open the template in the editor.
                 var currCode="path"+i;
                 //console.log(currCode);
                 //window[currCode].transform("s2"); //not necessary, we are scaling this dynamically
+
                 var el = window[currCode];
+                el.attr({'stroke-width':'0.6'});
                 el.mouseover(function() {
                     this.toFront();
                     this.attr({
                         cursor: 'pointer',
-                        fill: '#990000',
+                        fill: '#ff0000',
                         stroke: '#fff',
-                        'stroke-width': '2'
+                        'stroke-width': '1'
                     });
                     this.animate({
                         scale: '1.2'
@@ -85,14 +61,18 @@ and open the template in the editor.
                     scale: '1.05'
                 }, 200);
                 this.attr({
-                    fill: '#003366'
+                    fill: '#3c7bae',
+                    stroke: '#326994',
+                    'stroke-width':'0.6'
                 });
+                this.toBack();
             });
             el.click(function() {
                 this.animate({
                     fill: 'green'
                 }, 200);
             });
+
             }
             for (var j=startCircleCode; j<=endCircleCode; j+=nameStep) {
                 var currCode2="circle"+j;
