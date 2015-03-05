@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript" src="js/libs/raphael/raphael-min.js">
+        </script>
+    </head>
+    <body>
+        <div>TODO write content</div>
+        <div id="rsr" style="width: 500px"></div>
+        <script type="text/javascript" src="js/ukrmap.js"> </script>
+        <script type="text/javascript">
+            //need for autoresizing and rescaling. 100% responsive!
+            var svg = document.querySelector("svg");
+            svg.removeAttribute("width");
+            svg.removeAttribute("height");
+            //http://stackoverflow.com/questions/11176396/how-can-i-scale-raphael-js-elements-on-window-resize-using-jquery
+            var startOblastCode = 3098;
+            var endOblastCode = 3146;
+            var startCircleCode = 3151;
+            var endCircleCode = 3201;
+            var nameStep=2;
+            var semanticOblastCodes = [
+  'Odesska',
+  'Nikolaevska',
+  'Khersonska',
+  'Volynska',
+  'Rovenska',
+  'Lvovska',
+  'Zakarpatska',
+  'Ternopolska',
+  'Hmelnytska',
+  'Zhitomirska',
+  'Chernovitska',
+  'Vinnitska',
+  'Kievska',
+  'Chernigovska',
+  'Sumska',
+  'Cherkasska',
+  'Poltavska',
+  'Kirovogradska',
+  'Dnipropetrovska',
+  'IvanoFrankovska',
+  'Zaporizhska',
+  'Kharkovska',
+  'Luganska',
+  'Donetska',
+  'Crimea']; //these codes are in sorted order, corresponding to path number
+  var semanticOblastCodes2 = [
+  'Одеська', 'Миколаївська', 'Херсонська', 'Волинська', 'Рівненська',
+  'Львівська', 'Закарпатська', 'Тернопільська', 'Хмельницька', 'Житомирська',
+  'Чернівецька', 'Вінницька', 'Київська', 'Чернігівська', 'Сумська', 'Черкаська',
+  'Полтавська', 'Кіровоградська', 'Дніпропетровська', 'Івано-Франківська', 'Запорізька',
+  'Харківська', 'Луганська', 'Донецька', 'АР Крим'];
+            //rsr.transform("s2");
+            //getting variables by their names. ReadySetRaphael returned mapdata in unstructured form, each region is a separate path.
+            //all variables in ukrmap.js are global (we may use http://stackoverflow.com/questions/724857/how-to-find-javascript-variable-by-its-name)
+            //cycle through regions
+            for (var i=startOblastCode; i<=endOblastCode; i+=nameStep) {
+                var currCode="path"+i;
+                //console.log(currCode);
+                //window[currCode].transform("s2"); //not necessary, we are scaling this dynamically
+                var el = window[currCode];
+                el.mouseover(function() {
+                    this.toFront();
+                    this.attr({
+                        cursor: 'pointer',
+                        fill: '#990000',
+                        stroke: '#fff',
+                        'stroke-width': '2'
+                    });
+                    this.animate({
+                        scale: '1.2'
+                    }, 200);
+                });
+            el.mouseout(function() {
+                this.animate({
+                    scale: '1.05'
+                }, 200);
+                this.attr({
+                    fill: '#003366'
+                });
+            });
+            el.click(function() {
+                this.animate({
+                    fill: 'green'
+                }, 200);
+            });
+            }
+            for (var j=startCircleCode; j<=endCircleCode; j+=nameStep) {
+                var currCode2="circle"+j;
+                //console.log(currCode2);
+                
+            }
+            
+        </script>
+    </body>
+</html>
