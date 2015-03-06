@@ -22,17 +22,35 @@
             var startCircleCode = 3151;
             var endCircleCode = 3201;
             var nameStep=2;
-            var semanticOblastCodes = [
-  'Odesska', 'Nikolaevska', 'Khersonska', 'Volynska', 'Rovenska', 'Lvovska', 'Zakarpatska', 
-  'Ternopolska', 'Hmelnytska', 'Zhitomirska', 'Chernovitska', 'Vinnitska', 'Kievska', 'Chernigovska', 
-  'Sumska', 'Cherkasska', 'Poltavska', 'Kirovogradska', 'Dnipropetrovska', 'IvanoFrankovska', 'Zaporizhska', 
-  'Kharkovska', 'Luganska', 'Donetska', 'Crimea']; //these codes are in sorted order, corresponding to path number
+  //this structure is so bydlocode TT___TT
+  clickedRegion=null;
   var semanticOblastCodes2 = [
-  'Одеська', 'Миколаївська', 'Херсонська', 'Волинська', 'Рівненська',
-  'Львівська', 'Закарпатська', 'Тернопільська', 'Хмельницька', 'Житомирська',
-  'Чернівецька', 'Вінницька', 'Київська', 'Чернігівська', 'Сумська', 'Черкаська',
-  'Полтавська', 'Кіровоградська', 'Дніпропетровська', 'Івано-Франківська', 'Запорізька',
-  'Харківська', 'Луганська', 'Донецька', 'АР Крим'];
+  'path3098'=>['Одеська'], 
+  'path3100'=>['Миколаївська'], 
+  'path3102'=>['Херсонська'], 
+  'path3104'=>['Волинська'], 
+  'path3106'=>['Рівненська'], 
+  'path3108'=>['Львівська'], 
+  'path3110'=>['Закарпатська'], 
+  'path3112'=>['Тернопільська'], 
+  'path3114'=>['Хмельницька'], 
+  'path3116'=>['Житомирська'], 
+  'path3118'=>['Чернівецька'], 
+  'path3120'=>['Вінницька'], 
+  'path3122'=>['Київська'], 
+  'path3124'=>['Чернігівська'], 
+  'path3126'=>['Сумська'], 
+  'path3128'=>['Черкаська'],
+  'path3130'=>['Полтавська'], 
+  'path3132'=>['Кіровоградська'], 
+  'path3134'=>['Дніпропетровська'], 
+  'path3136'=>['Івано-Франківська'], 
+  'path3138'=>['Запорізька'],
+  'path3140'=>['Харківська'], 
+  'path3142'=>['Луганська'], 
+  'path3144'=>['Донецька'], 
+  'path3146'=>['АР Крим'],
+  ];
             //rsr.transform("s2");
             //getting variables by their names. ReadySetRaphael returned mapdata in unstructured form, each region is a separate path.
             //all variables in ukrmap.js are global (we may use http://stackoverflow.com/questions/724857/how-to-find-javascript-variable-by-its-name)
@@ -45,6 +63,9 @@
                 var el = window[currCode];
                 el.attr({'stroke-width':'0.6'});
                 el.mouseover(function() {
+                    if (clickedRegion===this.attr('id')) {
+                        return;
+                    }
                     this.toFront();
                     this.attr({
                         cursor: 'pointer',
@@ -57,6 +78,7 @@
                     }, 200);
                 });
             el.mouseout(function() {
+                if (clickedRegion===this.attr('id'))
                 this.animate({
                     scale: '1.05'
                 }, 200);
@@ -68,9 +90,17 @@
                 this.toBack();
             });
             el.click(function() {
-                this.animate({
-                    fill: 'green'
-                }, 200);
+                if (clickedRegion!==null){
+                    window[clickedRegion].attr({
+                        fill: '#3c7bae',
+                        stroke: '#326994',
+                        'stroke-width':'0.6'
+                    });
+                }
+                this.animate({ fill: 'green' }, 200);
+                clickedRegion=this.attr('id');
+                
+                console.log(clickedRegion,":",typeof clickedRegion);
             });
 
             }
